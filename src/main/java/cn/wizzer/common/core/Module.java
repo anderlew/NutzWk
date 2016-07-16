@@ -1,5 +1,6 @@
 package cn.wizzer.common.core;
 
+import cn.wizzer.common.view.velocity.VelocityViewMaker;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -27,7 +28,7 @@ import java.io.File;
 @IocBy(type = ComboIocProvider.class, args = {"*json", "config/ioc/", "*anno", "cn.wizzer", "*tx", "*quartz", "*async"})
 @Localization(value = "locales/", defaultLocalizationKey = "zh_CN")
 @Encoding(input = "UTF-8", output = "UTF-8")
-@Views({BeetlViewMaker.class})
+@Views({BeetlViewMaker.class, VelocityViewMaker.class})
 @SetupBy(value = Setup.class)
 @ChainBy(args = "config/chain/nutzwk-mvc-chain.json")
 @SessionBy(ShiroSessionProvider.class)
@@ -108,6 +109,7 @@ public class Module {
             e.printStackTrace();
         }
     }
+
     private static void usage(Options options) {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("Main", options);
